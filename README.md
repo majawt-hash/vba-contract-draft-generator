@@ -13,7 +13,7 @@ Formularz **VBA UserForm** wbudowany bezpośrednio w szablon Worda (`.dotm` / `.
 1. **Interaktywny Wybór Podmiotu:** Po uruchomieniu makra pojawia się okienko dialogowe (UserForm), z którego użytkownik wybiera 1 z 12 podmiotów.
 2. **Automatyczny Branding & Nagłówki:** Skrypt dynamicznie wstawia dedykowane logo wybranej spółki w nagłówku każdej strony dokumentu.
 3. **Synchronizacja Danych i Zmiennych:** Automatycznie uzupełnia i wstrzykuje w odpowiednie miejsca:
-   * Numery oraz daty umów głównych i umów z operatorem (TAURON).
+   * Numery oraz daty umów głównych i umów z operatorem.
    * Dane rejestrowe spółki: KRS, REGON, NIP.
    * Personalizację reprezentacji (Prezes Zarządu podpisujący umowę).
    * Dedykowane adresy e-mail (kontaktowe oraz do e-faktur).
@@ -43,7 +43,7 @@ Formularz **VBA UserForm** wbudowany bezpośrednio w szablon Worda (`.dotm` / `.
    ▼         ▼                  ▼
 [ Inject ] [ Replace Text ] [ Apply Page Breaks ]
 [ Logo   ] (KRS, NIP, Rep,  (Attachments forced
-(Header)   TAURON Agreement) to New Pages)
+(Header)   Operator Agrmnt) to New Pages)
    │         │                  │
    └─────────┼──────────────────┘
              ▼
