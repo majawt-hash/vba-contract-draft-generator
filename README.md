@@ -1,46 +1,50 @@
-# 📜 VBA Word Contract Generator & Corporate Entity Automator
+# 📜 Word VBA Contract Draft Generator & Entity Automator
 
-Automatyczne narzędzie w **Excel VBA**, które generuje gotowe do podpisu drafty umów w formacie **Microsoft Word (.docx)** dla grupy 12 podmiotów powiązanych, wykorzystując wspólny szablon bazowy.
+Automatyczne narzędzie zbudowane w całości w **Microsoft Word (VBA)**, które generuje gotowe do podpisu drafty umów w formacie `.docx` dla grupy 12 podmiotów powiązanych za pomocą interaktywnego formularza **UserForm**.
 
 ---
 
 ## 🎯 Problem Biznesowy
-Zarządzanie dokumentacją prawną dla 12 różnych podmiotów w ramach jednej grupy kapitałowej generowało ogromne ryzyko błędów. Ręczne uzupełnianie danych rejestrowych, reprezentacji, kontaktów oraz podmienianie logotypów w Wordzie było czasochłonne, a zmiana układu stron często powodowała „rozjeżdżanie się” struktury załączników.
+Ręczne edytowanie szablonów umów w Wordzie dla 12 różnych podmiotów w ramach grupy kapitałowej wiązało się z dużym ryzykiem błędów. Uzupełnianie danych rejestrowych, reprezentacji, dedykowanych adresów e-mail czy podmienianie logotypów w nagłówkach było czasochłonne. Dodatkowo dopisywanie treści często powodowało „rozjeżdżanie się” układu stron i załączników.
 
 ## 💡 Rozwiązanie
-Formularz w Excelu zoptymalizowany pod kątem automatyzacji Worda, który po wybraniu konkretnego podmiotu z listy rozwijanej wykonuje pełny montaż dokumentu:
+Formularz **VBA UserForm** wbudowany bezpośrednio w szablon Worda (`.dotm` / `.docx`), który prowadzi użytkownika krok po kroku:
 
-1. **Branding & Nagłówki:** Dynamicznie wstawia dedykowane logo podmiotu w nagłówku każdej strony dokumentu Word.
-2. **Synchronizacja Metadanych:** Automatycznie wstrzykuje w odpowiednie zakładki/placeholdery:
-   * Numery i daty umów głównych oraz umów z operatorem systemów dystrybucyjnych (OSD).
-   * Dane rejestrowe: KRS, REGON, NIP.
-   * Dane reprezentacji (Prezes Zarządu składający podpis).
-   * Dedykowane adresy e-mail (operacyjne oraz do e-faktur).
-3. **Formatowanie Strukturalne:** Automatycznie wstawia twarde podziały stron przed każdym załącznikiem, gwarantując idealną spójność wizualną tekstu i braki przesunięć formatowania.
+1. **Interaktywny Wybór Podmiotu:** Po uruchomieniu makra pojawia się okienko dialogowe (UserForm), z którego użytkownik wybiera 1 z 12 podmiotów.
+2. **Automatyczny Branding & Nagłówki:** Skrypt dynamicznie wstawia dedykowane logo wybranej spółki w nagłówku każdej strony dokumentu.
+3. **Synchronizacja Danych i Zmiennych:** Automatycznie uzupełnia i wstrzykuje w odpowiednie miejsca:
+   * Numery oraz daty umów głównych i umów z operatorem (TAURON).
+   * Dane rejestrowe spółki: KRS, REGON, NIP.
+   * Personalizację reprezentacji (Prezes Zarządu podpisujący umowę).
+   * Dedykowane adresy e-mail (kontaktowe oraz do e-faktur).
+4. **Formatowanie Strukturalne Załączników:** Makro wymusza rozpoczynanie każdego załącznika od nowej strony (twardy podział stron), zapobiegając przesuwaniu się tekstu i psuciu układu graficznego.
 
 ---
 
 ## 🛠️ Stos Technologiczny
-* **Środowisko:** Microsoft Excel + Microsoft Word Automation
+* **Środowisko:** Microsoft Word
 * **Język:** VBA (Visual Basic for Applications)
-* **Biblioteki:** Word Object Library (`Word.Application`, `Word.Document`)
-* **Mechanizmy Worda:** Bookmarks / Find & Replace, Header Sections, Page Breaks
+* **Komponenty:** UserForms, Word Bookmarks / Content Controls, Headers & Footers API, Page Break Engine
 
 ---
 
 ## 🏗️ Architektura Przepływu
 
 ```text
-[ User Selects Entity from Dropdown (1 of 12) ]
-                      │
-                      ▼
-[ Execute VBA Macro (Excel -> Word Automation) ]
-                      │
-   ┌──────────────────┼──────────────────┐
-   ▼                  ▼                  ▼
-[ Inject Logo ]  [ Replace Text ]  [ Apply Page Breaks ]
-(Headers)        (KRS, NIP, Rep)   (Attachments)
-   │                  │                  │
-   └──────────────────┼──────────────────┘
-                      ▼
-[ Generated Word Draft (.docx) Ready for Signature ]
+[ User Opens Word Template ]
+             │
+             ▼
+[ VBA UserForm Pops Up ] ──> [ Select 1 of 12 Entities from Dropdown ]
+             │
+             ▼
+[ Click "Generate Contract" ]
+             │
+   ┌─────────┼──────────────────┐
+   ▼         ▼                  ▼
+[ Inject ] [ Replace Text ] [ Apply Page Breaks ]
+[ Logo   ] (KRS, NIP, Rep,  (Attachments forced
+(Header)   TAURON Agreement) to New Pages)
+   │         │                  │
+   └─────────┼──────────────────┘
+             ▼
+[ Completed Word Draft Ready to Sign ]
